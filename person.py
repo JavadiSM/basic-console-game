@@ -12,15 +12,19 @@ class Consts:
     AGE_MUL = 5
 
 class Person:
-    instances = []
+    instances: list = []
 
     def __init__(self, name, age):
         self.name: str = name
         self.age: str = age
+        self.level: int = 1
+        self.work_place = None
+        self.job:str = ""
+        Person.instances.append(self)
 
     def do_level(self, income):
-        pass
-
+        return income * math.sqrt(self.work_place.level * self.level)
+    
     def calc_income(self):
         pass
 
@@ -28,14 +32,16 @@ class Person:
         pass
 
     def calc(self):
-        pass
+        income = self.calc_income()
+        cost = self.calc_life_cost()
+        return self.do_level(income) - cost
 
     def get_job(self):
-        pass
+        return self.job
 
     def upgrade(self):
-        pass
+        self.level += 1
 
     @staticmethod
     def calc_all():
-        pass
+        return sum([person.calc() for person in Person.instances])
