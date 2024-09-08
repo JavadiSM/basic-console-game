@@ -1,7 +1,7 @@
-# YOUR IMPORTS GO HERE
+from work_place import WorkPlace
 
 
-class Mine(...):
+class Mine(WorkPlace):
     def __init__(self, name):
         pass
 

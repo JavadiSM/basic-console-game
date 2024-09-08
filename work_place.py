@@ -13,12 +13,18 @@ class Consts:
 
 
 class WorkPlace:
+    instances = [] #static variable
 
     def __init__(self, name: str):
-        pass
+        self.name:str = name
+        self.level:int = 1
+        self.expertise:str = ""
+        self.employees:list = []
+        self.capacity:int = 1
+        WorkPlace.instances.append(self)
 
     def get_price(self) -> int:
-        pass
+        return Consts.BASE_PRICE[self.expertise]
 
     def calc_costs(self):
         pass
@@ -27,17 +33,22 @@ class WorkPlace:
         pass
 
     def upgrade(self):
-        pass
+        self.level +=1
+        self.calc_capacity()
 
     def hire(self, person: Person):
-        pass
+        if len(self.employees) == self.capacity:
+            raise WorkPlaceIsFull()
+        else:
+            person.work_place = self
+            self.employees.append(person)
 
     def get_expertise(self) -> str:
-        pass
+        return self.expertise
 
     def calc(self) -> int:
-        pass
+        return -1 * self.calc_costs()
 
     @staticmethod
     def calc_all() -> int:
-        pass
+        return sum([workplace.calc() for workplace in WorkPlace.instances])
