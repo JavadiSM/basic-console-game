@@ -25,12 +25,13 @@ def main():
     #initialzing player
     ColorPrinter.colored_print("enter your character in game name","red")
     name:str = input()
-    ColorPrinter.colored_print("enter your character in game name","blue")
+    ColorPrinter.colored_print("enter your character in game age","blue")
     age:int = int(input())
     player:Player = Player(name,age)
 
     while not re.match("^exit$",user_command:=input()):
-
+        if user_command == "see map":
+            print(player.game_elements)
         print("oops, your command are unkown, try again")
     os.system("cls")
 

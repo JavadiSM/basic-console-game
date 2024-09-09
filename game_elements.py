@@ -1,7 +1,6 @@
 import os
 import re
 from cmd_color_printer import ColorPrinter, print_hat
-from player import Player
 from work_place import *
 from mine import Mine
 from school import School
@@ -72,11 +71,10 @@ class GameElements:
     def generate_random_age() -> int:  
         return random.choice(GameElements.ages)
     
-    def __init__(self,player:Player) -> None:
+    def __init__(self) -> None:
         self.__work_places: list[WorkPlace] = []
         self.__people: list[Person] = []
         self.__round:int = 0
-        self.__player = player
         list1 = [1, 2, 3]
         for _ in range(2000):
             if random.choice(list1)==1:
@@ -93,3 +91,25 @@ class GameElements:
                 self.__work_places.append(School(GameElements.generate_random_company_name()))
             elif random.choice(list1)==3:
                 self.__work_places.append(Mine(GameElements.generate_random_company_name()))
+
+
+    def __str__(self) -> str:  
+        printer = ColorPrinter()  
+        workers_list:list[str] = []
+        places_list:list[str] = []
+
+        # Print game round  
+        workers_list.append(f"{printer.colors['blue']}Round: {self.__round}{printer.colors['reset']}\n")  
+
+        # Print People  
+        workers_list.append(f"{printer.colors['yellow']}People in the game:{printer.colors['reset']}\n")  
+        for person in self.__people:  
+            workers_list.append(f" - {printer.colors['cyan']}{str(person)}{printer.colors['reset']}")  
+        workers_list = " <-///-> ".join(workers_list)
+        # Print Workplaces  
+        places_list.append(f"\n{printer.colors['yellow']}Workplaces in the game:{printer.colors['reset']}\n")  
+        for work_place in self.__work_places:  
+            places_list.append(f" - {printer.colors['magenta']}{str(work_place)}{printer.colors['reset']}")  
+        places_list = " <-///-> ".join(places_list)
+        output = [workers_list,places_list]  
+        return "\n".join(output)

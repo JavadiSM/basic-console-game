@@ -53,3 +53,6 @@ class WorkPlace:
     @staticmethod
     def calc_all() -> int:
         return sum([workplace.calc() for workplace in WorkPlace.instances])
+    
+    def __str__(self) -> str:
+        return f"{self.expertise} {self.name}"

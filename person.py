@@ -48,3 +48,6 @@ class Person:
     @staticmethod
     def calc_all() -> int:
         return sum([person.calc() for person in Person.instances])
+    
+    def __str__(self) -> str:
+        return f"{self.name} {self.age} {self.job}"

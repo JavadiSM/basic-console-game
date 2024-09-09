@@ -10,7 +10,7 @@ class Player(Person):
         self.__money:int = money
         self.__owned_places: list[WorkPlace] = []
         self.__employees: list[Person] = []
-        self.game_elements: GameElements = GameElements(self)
+        self.game_elements: GameElements = GameElements()
 
     def get_money(self) -> int:
         return self.__money
